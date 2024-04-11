@@ -2,9 +2,9 @@ import os, sys, io
 import M5
 from M5 import *
 
-#from m5stack import * #UIFLOW1
-#from m5ui import * #UIFLOW1
-#from uiflow import * #UIFLOW1
+from m5stack import * #UIFLOW1
+from m5ui import * #UIFLOW1
+from uiflow import * #UIFLOW1
 from libs.m5_espnow import M5ESPNOW
 import time
 
@@ -38,8 +38,6 @@ def buttonC_wasPressed():
   run = 0
   pass
 
-
-
 def setup():
 
   M5.begin()
@@ -71,12 +69,6 @@ def setup():
   label8 = M5TextBox(174, 144, "label8", lcd.FONT_Ubuntu, 0xFFFFFF, rotate=0)
 
   peer_mac = None
-  
-
-
-
-def loop():
-  M5.update()
   now.espnow_init(1, 1)
   count_send = 0
   cnt_succes = 0
@@ -85,6 +77,10 @@ def loop():
   slave_ssid = 'M5_Slave'
   while peer_mac == None:
     peer_mac = now.espnow_scan(1, slave_ssid)
+  
+
+def loop():
+  M5.update()
   label1.setText(str(slave_ssid))
   label3.setText(str(peer_mac))
   now.espnow_add_peer(peer_mac, 1, 0, False)
@@ -112,13 +108,6 @@ if __name__ == '__main__':
       print_error_msg(e)
     except ImportError:
       print("please update to latest firmware")
-
-
-
-
-
-
-
 
 
 
